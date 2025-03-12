@@ -1,0 +1,13 @@
+.classpath
+.project
+.settings/
+.target/
+.idea/
+.idea_modules/
+target/
+logs/
+#*.conf
+.DS_Store
+*.iml
+pom.xml.versionsBackup
+/pay-main/d:error.txt
