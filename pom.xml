@@ -11,6 +11,7 @@
 
     <modules>
         <module>springboot2-adapt-logback13</module>
+        <module>springboot2-adapt-logback15</module>
     </modules>
 
     <properties>

@@ -1,0 +1,2 @@
+org.springframework.boot.logging.LoggingSystemFactory=\
+org.springframework.boot.logging.logback.LogbackLogging15System.Factory
