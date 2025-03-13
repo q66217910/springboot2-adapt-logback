@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.boot.logging.logback.LogbackLoggingSystem15Properties;
+import org.springframework.boot.logging.logback.LogbackLoggingSystemProperties;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.Environment;
 import org.springframework.util.Assert;
@@ -38,7 +39,7 @@ import org.springframework.util.StringUtils;
  * @author Ben Hale
  * @since 1.0.0
  */
-public abstract class LoggingSystem15 {
+public abstract class LoggingSystem15 extends LoggingSystem {
 
     /**
      * A System property that can be used to indicate the {@link LoggingSystem} to use.
@@ -63,18 +64,20 @@ public abstract class LoggingSystem15 {
     /**
      * The name of an {@link Environment} property used to indicate that a correlation ID
      * is expected to be logged at some point.
+     *
      * @since 3.2.0
      */
     public static final String EXPECT_CORRELATION_ID_PROPERTY = "logging.expect-correlation-id";
 
     /**
      * Return the {@link LoggingSystemProperties} that should be applied.
+     *
      * @param environment the {@link ConfigurableEnvironment} used to obtain value
      * @return the {@link LoggingSystemProperties} to apply
      * @since 2.4.0
      */
-    public LogbackLoggingSystem15Properties getSystemProperties(ConfigurableEnvironment environment) {
-        return new LogbackLoggingSystem15Properties(environment);
+    public LogbackLoggingSystemProperties getSystemProperties(ConfigurableEnvironment environment) {
+        return new LogbackLoggingSystemProperties(environment);
     }
 
     /**
@@ -86,11 +89,12 @@ public abstract class LoggingSystem15 {
 
     /**
      * Fully initialize the logging system.
+     *
      * @param initializationContext the logging initialization context
-     * @param configLocation a log configuration location or {@code null} if default
-     * initialization is required
-     * @param logFile the log output file that should be written or {@code null} for
-     * console only output
+     * @param configLocation        a log configuration location or {@code null} if default
+     *                              initialization is required
+     * @param logFile               the log output file that should be written or {@code null} for
+     *                              console only output
      */
     public void initialize(LoggingInitializationContext initializationContext, String configLocation, LogFile logFile) {
     }
@@ -106,6 +110,7 @@ public abstract class LoggingSystem15 {
      * Returns a {@link Runnable} that can handle shutdown of this logging system when the
      * JVM exits. The default implementation returns {@code null}, indicating that no
      * shutdown is required.
+     *
      * @return the shutdown handler, or {@code null}
      */
     public Runnable getShutdownHandler() {
@@ -115,6 +120,7 @@ public abstract class LoggingSystem15 {
     /**
      * Returns a set of the {@link LogLevel LogLevels} that are actually supported by the
      * logging system.
+     *
      * @return the supported levels
      */
     public Set<LogLevel> getSupportedLogLevels() {
@@ -123,10 +129,11 @@ public abstract class LoggingSystem15 {
 
     /**
      * Sets the logging level for a given logger.
+     *
      * @param loggerName the name of the logger to set ({@code null} can be used for the
-     * root logger).
-     * @param level the log level ({@code null} can be used to remove any custom level for
-     * the logger and use the default configuration instead)
+     *                   root logger).
+     * @param level      the log level ({@code null} can be used to remove any custom level for
+     *                   the logger and use the default configuration instead)
      */
     public void setLogLevel(String loggerName, LogLevel level) {
         throw new UnsupportedOperationException("Unable to set log level");
@@ -135,6 +142,7 @@ public abstract class LoggingSystem15 {
     /**
      * Returns a collection of the current configuration for all a {@link LoggingSystem}'s
      * loggers.
+     *
      * @return the current configurations
      * @since 1.5.0
      */
@@ -144,6 +152,7 @@ public abstract class LoggingSystem15 {
 
     /**
      * Returns the current configuration for a {@link LoggingSystem}'s logger.
+     *
      * @param loggerName the name of the logger
      * @return the current configuration
      * @since 1.5.0
@@ -154,6 +163,7 @@ public abstract class LoggingSystem15 {
 
     /**
      * Detect and return the logging system in use. Supports Logback and Java Logging.
+     *
      * @param classLoader the classloader
      * @return the logging system
      */
@@ -176,8 +186,7 @@ public abstract class LoggingSystem15 {
             Constructor<?> constructor = systemClass.getDeclaredConstructor(ClassLoader.class);
             constructor.setAccessible(true);
             return (LoggingSystem) constructor.newInstance(classLoader);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             throw new IllegalStateException(ex);
         }
     }

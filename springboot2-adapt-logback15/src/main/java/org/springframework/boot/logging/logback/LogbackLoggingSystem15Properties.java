@@ -68,7 +68,7 @@ public class LogbackLoggingSystem15Properties extends LoggingSystem15Properties 
      */
     public LogbackLoggingSystem15Properties(Environment environment, Function<String, String> defaultValueResolver,
                                           BiConsumer<String, String> setter) {
-        super(environment, setter);
+        super(environment,defaultValueResolver, setter);
     }
 
     @Override

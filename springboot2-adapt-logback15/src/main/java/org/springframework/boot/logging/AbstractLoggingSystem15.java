@@ -37,7 +37,7 @@ import org.springframework.util.SystemPropertyUtils;
  * @author Dave Syer
  * @since 1.0.0
  */
-public abstract class AbstractLoggingSystem15 extends LoggingSystem15 {
+public abstract class AbstractLoggingSystem15 extends LoggingSystem {
 
     protected static final Comparator<LoggerConfiguration> CONFIGURATION_COMPARATOR = new LoggerConfigurationComparator(
             ROOT_LOGGER_NAME);

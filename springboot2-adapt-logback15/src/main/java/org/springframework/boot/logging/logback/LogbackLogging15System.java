@@ -110,8 +110,8 @@ public class LogbackLogging15System extends AbstractLoggingSystem15{
     }
 
     @Override
-    public LogbackLoggingSystem15Properties getSystemProperties(ConfigurableEnvironment environment) {
-        return new LogbackLoggingSystem15Properties(environment, getDefaultValueResolver(environment), null);
+    public LogbackLoggingSystemProperties getSystemProperties(ConfigurableEnvironment environment) {
+        return new LogbackLoggingSystemProperties(environment);
     }
 
     @Override
@@ -482,7 +482,7 @@ public class LogbackLogging15System extends AbstractLoggingSystem15{
         @Override
         public LoggingSystem getLoggingSystem(ClassLoader classLoader) {
             if (PRESENT) {
-                return new LogbackLoggingSystem(classLoader);
+                return new LogbackLogging15System(classLoader);
             }
             return null;
         }
